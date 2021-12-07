@@ -40,3 +40,4 @@ build/
 /webpack.generated.js
 /webpack.config.js
 /.npmrc
+/local/
