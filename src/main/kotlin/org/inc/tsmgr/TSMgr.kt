@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
 import org.testcontainers.containers.BindMode.READ_WRITE
 import org.testcontainers.containers.GenericContainer
-import org.testcontainers.containers.MongoDBContainer
 import org.testcontainers.utility.DockerImageName
 import java.io.File
+
+class KGenericContainer(imageName: DockerImageName) : GenericContainer<KGenericContainer>(imageName)
 
 @SpringBootApplication
 @EnableMongoRepositories
@@ -20,8 +20,7 @@ class TSMgr {
         private val LOG = LogManager.getLogger()
         private val DATA_PATH = "local/mongo/data"
         private val CONTAINER_DATA_PATH = "/data/db"
-        private val LOGS_PATH = "local/mongo/logs"
-        val mongoDB: GenericContainer<*> = GenericContainer(DockerImageName.parse("mongo:4.0.10"))
+        val mongoDB: GenericContainer<*> = KGenericContainer(DockerImageName.parse("mongo:4.0.10"))
             .withClasspathResourceMapping(
                 ClassLoader.getSystemClassLoader().getResource("").path
                     .let { "$it$DATA_PATH" }

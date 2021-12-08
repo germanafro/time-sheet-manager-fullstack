@@ -11,8 +11,11 @@ class AccountController(
     @GetMapping("/")
     fun accounts(): Iterable<Account> = service.getAccounts()
 
+    @GetMapping("/{id}")
+    fun account(@RequestParam id: String): Account? = service.getAccount(id)
+
     @PostMapping("/import")
-    fun import(@RequestBody path: String): String = service.import(path)
+    fun import(@RequestBody accounts: Accounts): String = service.import(accounts)
 
 
 }

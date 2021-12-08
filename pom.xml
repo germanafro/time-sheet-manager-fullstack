@@ -18,6 +18,7 @@
         <kotlin.version>1.6.0</kotlin.version>
         <vaadin.version>23.0-SNAPSHOT</vaadin.version>
         <testcontainers.version>1.16.2</testcontainers.version>
+        <poi.version>5.0.0</poi.version>
     </properties>
 
 
@@ -59,6 +60,16 @@
 <!--            <artifactId>spring-boot-devtools</artifactId>-->
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

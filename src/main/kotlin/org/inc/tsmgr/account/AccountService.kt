@@ -17,12 +17,19 @@ class AccountService(
     fun getAccounts(): Iterable<Account> = repository.findAll()
 
 
+    fun getAccount(id: String): Account? = repository.findById(id).orElse(null)
+
+
     fun import(path: String): String =
         load(path)
-            .let(Accounts::accounts).values
-            .map { repository.save(it) }
-            .count()
-            .let { count -> "imported: $count accounts".also { LOG.info(it) } }
+            .let(::import)
+
+
+    fun import(accounts: Accounts): String = accounts
+        .let(Accounts::accounts).values
+        .map { repository.save(it) }
+        .count()
+        .let { count -> "imported: $count accounts".also { LOG.info(it) } }
 
 
     private fun load(path: String): Accounts =
