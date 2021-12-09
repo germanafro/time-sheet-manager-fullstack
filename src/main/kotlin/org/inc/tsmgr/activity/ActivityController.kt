@@ -29,4 +29,7 @@ class ActivityController(
 
     @GetMapping("/export")
     fun export(): String = service.export()
+
+    @PostMapping("/export/json")
+    fun exportJson(): String = service.exportJson()
 }

@@ -76,7 +76,7 @@ class ActivityTable(
         grid.setItems(items.values)
         getAvailableAccounts().let { availableAccounts ->
             accountPicker.setItems(availableAccounts)
-            accountPicker.value = availableAccounts.first()
+            accountPicker.value = availableAccounts.firstOrNull() ?: ""
         }
     }
 

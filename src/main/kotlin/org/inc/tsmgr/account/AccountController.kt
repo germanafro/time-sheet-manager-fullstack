@@ -17,5 +17,8 @@ class AccountController(
     @PostMapping("/import")
     fun import(@RequestBody accounts: Accounts): String = service.import(accounts)
 
+    @PostMapping("/export/json")
+    fun exportJson(): String = service.exportJson()
+
 
 }

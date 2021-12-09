@@ -10,5 +10,6 @@ class ApplicationProperties {
 
     inner class Data {
         var json: Boolean = false
+
     }
 }

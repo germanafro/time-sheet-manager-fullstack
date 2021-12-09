@@ -41,3 +41,5 @@ build/
 /webpack.config.js
 /.npmrc
 /local/
+/node_modules/
+/export/

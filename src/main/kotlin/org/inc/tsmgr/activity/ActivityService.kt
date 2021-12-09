@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.apache.logging.log4j.LogManager
 import org.inc.tsmgr.activity.export.ExcelExporter
+import org.inc.tsmgr.JsonExporter
 import org.inc.tsmgr.util.TimeUtils.Companion.parseDate
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Service
@@ -14,14 +15,23 @@ import java.time.Month
 class ActivityService(
     private val objectMapper: ObjectMapper,
     private val repository: CrudRepository<Activity, ActivityId>,
-    private val excelExporter: ExcelExporter
+    private val excelExporter: ExcelExporter,
+    private val jsonExporter: JsonExporter
 ) {
     private val LOG = LogManager.getLogger()
     fun getActivities(): Iterable<Activity> = repository.findAll()
 
     fun getActivities(date: String): Iterable<Activity> = repository.findAll().filter { it.id.date.equals(date) }
 
-    fun export(): String = getActivities().let(this::toActivities).let(excelExporter::exportActivities)
+    fun export(): String = getActivities()
+        .let(this::toActivities)
+        .let(excelExporter::exportActivities)
+        .also { LOG.info(it) }
+
+    fun exportJson(): String = getActivities()
+        .let(this::toActivities)
+        .let(jsonExporter::exportActivities)
+        .also { LOG.info(it) }
 
     private fun toActivities(activities: Iterable<Activity>): Activities {
         return Activities(activities.groupBy { it.id.date.let(::parseDate).year }.mapValues { (year, activities) ->
