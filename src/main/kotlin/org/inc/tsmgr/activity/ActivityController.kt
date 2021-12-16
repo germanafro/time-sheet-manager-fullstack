@@ -1,6 +1,7 @@
 package org.inc.tsmgr.activity
 
 import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 
 @RestController()
@@ -8,8 +9,7 @@ import org.springframework.web.bind.annotation.*
 class ActivityController(
     private val service: ActivityService
 ) {
-    private val LOG = LogManager.getLogger()
-
+    private val LOG = LoggerFactory.getLogger(ActivityController::class.java)
     @GetMapping("")
     fun getActivities(): Iterable<Activity> = service.getActivities()
 

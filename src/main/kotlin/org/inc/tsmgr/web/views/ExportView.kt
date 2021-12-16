@@ -63,7 +63,6 @@ class ExportView(
     private val json: ExportResource = ExportResource(
         Image("icons/json_logo.png", "export as Json file"),
         "application/json",
-
         HorizontalLayout(activityJson, accountsJson)
     )
 

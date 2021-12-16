@@ -2,10 +2,10 @@ package org.inc.tsmgr.activity
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import org.apache.logging.log4j.LogManager
-import org.inc.tsmgr.activity.export.ExcelExporter
 import org.inc.tsmgr.JsonExporter
+import org.inc.tsmgr.activity.export.ExcelExporter
 import org.inc.tsmgr.util.TimeUtils.Companion.parseDate
+import org.slf4j.LoggerFactory
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Service
 import java.io.FileInputStream
@@ -18,7 +18,7 @@ class ActivityService(
     private val excelExporter: ExcelExporter,
     private val jsonExporter: JsonExporter
 ) {
-    private val LOG = LogManager.getLogger()
+    private val LOG = LoggerFactory.getLogger(ActivityService::class.java)
     fun getActivities(): Iterable<Activity> = repository.findAll()
 
     fun getActivities(date: String): Iterable<Activity> = repository.findAll().filter { it.id.date.equals(date) }

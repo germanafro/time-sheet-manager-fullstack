@@ -1,6 +1,7 @@
 package org.inc.tsmgr
 
 import org.apache.logging.log4j.LogManager
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
@@ -19,7 +20,7 @@ class KGenericContainer(imageName: DockerImageName) : GenericContainer<KGenericC
 @ConfigurationPropertiesScan
 class TSMgr {
     companion object {
-        private val LOG = LogManager.getLogger()
+        private val LOG = LoggerFactory.getLogger(TSMgr::class.java)
         private val DATA_PATH = "local/mongo/data"
         private val CONTAINER_DATA_PATH = "/data/db"
         val CLASS_PATH = ClassLoader.getSystemClassLoader().getResource("").path
