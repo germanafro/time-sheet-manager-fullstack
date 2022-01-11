@@ -36,7 +36,7 @@ class ActivityService(
     private fun toActivities(activities: Iterable<Activity>): Activities {
         return Activities(activities.groupBy { it.id.date.let(::parseDate).year }.mapValues { (year, activities) ->
             YearlyActivities(year,
-                activities.groupBy { Month.of(it.id.date.let(::parseDate).month) }
+                activities.groupBy { Month.of(it.id.date.let(::parseDate).month + 1) }
                     .mapValues { (month, activities) ->
                         MonthlyActivities(month, activities.groupBy { it.id.date }.mapValues { (date, activities) ->
                             DailyActivities(date, activities.associateBy { it.id.accountId })
